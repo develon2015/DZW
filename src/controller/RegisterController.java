@@ -13,29 +13,36 @@ import common.SysUtil;
 
 @Controller
 public class RegisterController {
-	
-    @RequestMapping("/user/register")
-    public ModelAndView helloWorld(HttpServletRequest request, HttpServletResponse response) {
-    	try {
+
+	@RequestMapping("/user/register")
+	public ModelAndView helloWorld(HttpServletRequest request, HttpServletResponse response) {
+		try {
 			request.setCharacterEncoding("UTF-8");
 			response.setCharacterEncoding("UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
-        SysUtil.log("Hello");
-        ModelAndView mv = new ModelAndView("register.jsp");
-        String req = request.getParameter("request");
-        if (req != null && "register".equals(req)) {
-        	// 处理注册请求
-        	String name = request.getParameter("name"),
-        			form_passwd = request.getParameter("form_passwd"),
-        					form_passwd_two = request.getParameter("form_passwd_two");
-        	SysUtil.log("注册, 用户名", name);
-        	if (form_passwd.equals(form_passwd_two)) {
-        		mv.addObject("register_result", "注册失败, 两次输入的密码不一致");
-        		return mv;
-        	}
-        }
-        return mv;
-    }
+
+		ModelAndView mv = new ModelAndView("register.jsp");
+		
+		String req = request.getParameter("request");
+		
+		if (req != null && "register".equals(req)) {
+			// 处理注册请求
+			String name = request.getParameter("name"), passwd = request.getParameter("passwd"),
+					passwd2 = request.getParameter("passwd2");
+			SysUtil.log("注册, 用户名", name);
+			SysUtil.log("注册, 密码", passwd);
+			SysUtil.log("注册, 密码", passwd2);
+			if (passwd == null || passwd2 == null) {
+				mv.addObject("register_result", "注册失败, 请输入密码");
+				return mv;
+			}
+			if (!passwd.equals(passwd2)) {
+				mv.addObject("register_result", "注册失败, 两次输入的密码不一致");
+				return mv;
+			}
+		}
+		return mv;
+	}
 }

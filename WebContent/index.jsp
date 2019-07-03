@@ -1,7 +1,7 @@
 <%@page import="common.SysUtil"%>
 <%@page import="user.UserMgr"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%
 	SysUtil.test();
 %>
@@ -17,9 +17,10 @@ body {
 </style>
 </head>
 <body>
-<h1>欢迎来到轻松短租网</h1>
-<a href="user/register">注册</a><br/>
-<a href="user/login">登录</a>
+	<h1>欢迎来到轻松短租网</h1>
+	<a href="user/register">注册</a>
+	<br />
+	<a href="user/login">登录</a>
 </body>
 </html>
 <%@page trimDirectiveWhitespaces="true"%>
